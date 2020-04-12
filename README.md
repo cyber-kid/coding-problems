@@ -10,3 +10,5 @@
 * Delimiter Matching (using Stack. Example: a{b[c]d}e // correct; a{b(c]d}e // not correct; ] doesn’t match ( )
 * Queue with wrap around
 * Priority queue
+* Shell sort
+* Quick sort
