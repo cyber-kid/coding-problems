@@ -12,3 +12,4 @@
 * Priority queue
 * Shell sort
 * Quick sort
+* Binary tree (delete method)
