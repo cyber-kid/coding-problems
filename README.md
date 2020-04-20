@@ -13,3 +13,5 @@
 * Shell sort
 * Quick sort
 * Binary tree (delete method)
+* Heap (delete, insert)
+* Graph (DFS,BFS, MTS, SPP)
