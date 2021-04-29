@@ -21,7 +21,7 @@
     </build>
 
     <properties>
-        <junit.version>4.12</junit.version>
+        <junit.version>4.13.1</junit.version>
         <assertj-core.version>3.15.0</assertj-core.version>
     </properties>
 
