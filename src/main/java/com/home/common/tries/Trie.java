@@ -1,10 +1,6 @@
 package com.home.common.tries;
 
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Queue;
+import java.util.*;
 
 public class Trie {
     private TrieNode root;

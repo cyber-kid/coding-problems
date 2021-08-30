@@ -3,7 +3,7 @@ package com.home.task_003_change_machine;
 import java.io.*;
 import java.util.*;
 
-public class Solution {
+public class SolutionHackerrank {
 
     // Complete the ways function below.
     static long ways(int n, List<Long> list) {

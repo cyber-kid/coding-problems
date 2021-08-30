@@ -1,4 +1,4 @@
-package com.home.knapsack;
+package com.home.task_007_knapsack;
 
 public class Solution1 {
     public static void main(String[] args) {

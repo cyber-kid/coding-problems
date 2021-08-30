@@ -9,7 +9,7 @@ class InsertionSort {
             int temp = inputArray[out];
             int in = out;
 
-            while (in > 0 && in <= out && inputArray[in - 1] > temp) {
+            while (in > 0 && inputArray[in - 1] > temp) {
                 inputArray[in] = inputArray[in - 1];
                 in--;
             }
