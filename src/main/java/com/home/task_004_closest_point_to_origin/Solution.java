@@ -1,49 +1,40 @@
 package com.home.task_004_closest_point_to_origin;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.PriorityQueue;
-import java.util.Queue;
+import java.util.Arrays;
 
 public class Solution {
     public static void main(String[] args) {
         Solution s = new Solution();
 
         int[][] input = {{3,3},{5,-1},{-2,4}};
-        int[][] result = s.kClosest(input, 2);
+        System.out.println(Arrays.deepToString(s.kClosest(input, 2)));
     }
 
-    public int[][] kClosest(int[][] points, int K) {
-        Map<Double, List<int[]>> distanceToLocation = new HashMap<>();
-        Queue<Double> distancesSorted = new PriorityQueue<>();
+    public int[][] kClosest(int[][] points, int k) {
+        int[] distances = new int[points.length];
 
-        for (int[] location: points) {
-            double distance = Math.sqrt(Math.pow(location[0], 2) + Math.pow(location[1], 2));
-
-            if (distanceToLocation.containsKey(distance)) {
-                distanceToLocation.get(distance).add(location);
-            } else {
-                List<int[]> locations = new ArrayList<>();
-                locations.add(location);
-
-                distanceToLocation.put(distance, locations);
-            }
-
-            distancesSorted.add(distance);
+        for (int i = 0; i < distances.length; i++) {
+            int[] pair = points[i];
+            distances[i] = getDistance(pair);
         }
 
-        int[][] result = new int[K][2];
-        int i = 0;
-        while(!distancesSorted.isEmpty() && i < K) {
-            List<int[]> locations = distanceToLocation.get(distancesSorted.poll());
+        Arrays.sort(distances);
 
-            for (int[] location : locations) {
-                result[i++] = location;
+        int distance = distances[k - 1];
+
+        int[][] result = new int[k][2];
+        int resultIndex = 0;
+
+        for (int[] point : points) {
+            if (getDistance(point) <= distance) {
+                result[resultIndex++] = point;
             }
         }
 
         return result;
+    }
+
+    private int getDistance(int[] pair) {
+        return pair[0] * pair[0] + pair[1] * pair[1];
     }
 }
