@@ -5,47 +5,61 @@ import java.util.Map;
 
 public class Solution {
     public String solve(String s, String t) {
-        Map<Character, Integer> given = new HashMap<>();
-        Map<Character, Integer> found = new HashMap<>();
+        String result = "";
+        Map<Character, Integer> store = new HashMap<>();
 
-        for (Character character : t.toCharArray()) {
-            given.merge(character, 1, Integer::sum);
+        // we build a look up table with all the chars from the pattern
+        // count the occurrences for that char
+        for (Character c : t.toCharArray()) {
+            store.merge(c, 1, Integer::sum);
         }
 
-        int totalFound = 0;
-        int leftIndex = 0;
-        String result = "";
+        int start = 0;
+        int end = 0;
+        int matchedChars = 0;
 
-        for (int rightIndex = 0; rightIndex < s.length(); rightIndex++) {
-            char rightItem = s.charAt(rightIndex);
+        while (end < s.length()) {
+            // if the look up table contains the current char
+            // we decrease the count of occurrences for that char
+            if (store.containsKey(s.charAt(end))) {
+                int count = store.get(s.charAt(end));
 
-            if (given.containsKey(rightItem)) {
-                int count = found.merge(rightItem, 1, Integer::sum);
-
-                if (count <= given.get(rightItem)) {
-                    totalFound++;
+                if (count == 1) {
+                    // if after decreasing the count it is 0 it means that one char from the pattern is matched
+                    matchedChars++;
+                    store.put(s.charAt(end), 0);
+                } else {
+                    store.put(s.charAt(end), count - 1);
                 }
             }
 
-            while (totalFound == t.length()) {
-                String interimResult = s.substring(leftIndex, rightIndex + 1);
-                if (result.isEmpty()) {
-                    result = interimResult;
-                } else if (interimResult.length() < result.length()) {
-                    result = interimResult;
+            // if we matched all the chars from the pattern
+            while (matchedChars == store.size()) {
+                // update the result
+                if (result.isEmpty() || result.length() > (end - start + 1)) {
+                    result = s.substring(start, end + 1);
                 }
 
-                char leftItem = s.charAt(leftIndex);
+                // and shrink the window (because we want the smallest substring)
+                // we updated the look up table
+                if (store.containsKey(s.charAt(start))) {
+                    int count = store.get(s.charAt(start));
 
-                if (given.containsKey(leftItem)) {
-                    int count = found.merge(leftItem, 1, (oldValue, newValue) -> oldValue - newValue);
-                    if (count < given.get(leftItem)) {
-                        totalFound--;
+                    // if the occurrence count for a char was 0
+                    // we decrement the count for matched chars
+                    if (count == 0) {
+                        matchedChars--;
+                        store.put(s.charAt(start), 1);
+                    } else {
+                        store.put(s.charAt(start), count + 1);
                     }
                 }
 
-                leftIndex++;
+                start++;
             }
+
+            // add next element to the window
+            end++;
         }
 
         return result;
@@ -56,7 +70,7 @@ public class Solution {
 
         System.out.printf("A: %s, E: %s\n", solution.solve("ADOBECODEBANC", "ABC"), "BANC");
         System.out.printf("A: %s, E: %s\n", solution.solve("a", "a"), "a");
-        System.out.printf("A: %s, E: %s\n", solution.solve("a", "aa"), "a");
+        System.out.printf("A: %s, E: %s\n", solution.solve("a", "aa"), "");
         System.out.printf("A: %s, E: %s\n", solution.solve("aa", "aa"), "aa");
     }
 }

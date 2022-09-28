@@ -14,20 +14,25 @@ public class Solution {
 
         while (!store.isEmpty()) {
             List<Integer> level = new ArrayList<>();
-            int length = store.size();
+            int levelSize = store.size();
 
-            for (int i = 0; i < length; i++) {
+            for (int i = 0; i < levelSize; i++) {
                 TreeNode node = store.poll();
+
                 if (Objects.nonNull(node)) {
                     level.add(node.val);
 
-                    store.offer(node.left);
-                    store.offer(node.right);
+                    if (Objects.nonNull(node.left)) {
+                        store.offer(node.left);
+                    }
+
+                    if (Objects.nonNull(node.right)) {
+                        store.offer(node.right);
+                    }
                 }
             }
-            if (!level.isEmpty()) {
-                result.add(level);
-            }
+
+            result.add(level);
         }
 
         return result;

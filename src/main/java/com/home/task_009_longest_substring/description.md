@@ -3,7 +3,7 @@
 https://leetcode.com/problems/longest-substring-without-repeating-characters/
 
 ### Intuition
-Given a substring with a fixed end index in the string, maintain a HashMap to record the index of each character in the current substring. When we find a repeated char we reduce the substring to this char's index that we take from the has table.
+Given a substring with a fixed end index in the string, maintain a HashMap to record the index of each character in the current substring. When we find a repeated char we reduce the substring to this char's index that we take from the hash table.
 
 ### Algorithm
 Approach: Sliding window
