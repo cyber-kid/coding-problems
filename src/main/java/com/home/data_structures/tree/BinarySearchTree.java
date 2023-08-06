@@ -70,26 +70,18 @@ public class BinarySearchTree {
         }
 
         Stack<TreeNode> store = new Stack<>();
-        store.push(root);
 
-        // stack of nodes that we should process
-        while (!store.isEmpty()) {
-            TreeNode node = store.peek();
+        while (!store.empty() || Objects.nonNull(root)) {
+            if (Objects.nonNull(root)) {
+                store.push(root);
 
-            // we reached the left most leaf node (with the smallest value)
-            if (Objects.isNull(node.getLeft())) {
-                // we remove it from pur processing stack
-                node = store.pop();
-                // we process it
-                System.out.println(node.getData());
-
-                // we check the nodes on the right
-                if (Objects.nonNull(node.getRight())) {
-                    store.push(node.getRight());
-                }
-                // there are more nodes on the left push them to processing stack
+                root = root.getLeft();
             } else {
-                store.push(node.getLeft());
+                root = store.pop();
+
+                System.out.println(root.getData());
+
+                root = root.getRight();
             }
         }
     }
