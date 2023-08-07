@@ -27,6 +27,9 @@ List<Character> store = new ArrayList<>();
 
 // we iterate over all elements in the array
 for (int right = 0; right < s.length(); right++) {
+    // we are processing the current element
+    store.add(s.charAt(right));
+    
     // while the condition is not met
     while (store.contains(s.charAt(right))) {
         // remove the element at the left pointer from processed elements
@@ -35,7 +38,6 @@ for (int right = 0; right < s.length(); right++) {
         // shrink the window
         left++;
     }
-    store.add(s.charAt(right));
 
     // update the result
     result = Math.max(result, right - left + 1);
