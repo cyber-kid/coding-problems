@@ -14,4 +14,7 @@ In this way we are pruning recursion tree with the help of memo array and reduci
 ## Approach 3: Dynamic Programming
 ### Algorithm
 
-As we can see this problem can be broken into subproblems, and it contains the optimal substructure property i.e. its optimal solution can be constructed efficiently from optimal solutions of its subproblems, we can use dynamic programming to solve this problem.
+1) Bottom-up approach. We are going from our target stair to the beginning.
+2) We init 2 variables with 1. The first variable represents how many steps we need to get to the last stair (always 1) and the second variable represents how many steps we need to get to the last stair from the before last one (also 1).
+3) The new value is calculated by summing those 2 and saved into a temp variable.
+4) Shift the variable n-1 times and the first variable will be the final result.
